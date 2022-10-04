@@ -1,15 +1,25 @@
 require 'test_helper'
+require_relative '../lib/app/point'
 
 class PointTest < Minitest::Test
   def setup
-    # Do nothing
+    Point.new(1, 2)
   end
 
-  def teardown
-    # Do nothing
+  def test_should_return_x
+    p = setup
+    assert(p.x == 1, 'Point x-value should be 1')
   end
 
-  def test
-    skip 'Not implemented'
+  def test_should_return_y
+    p = setup
+    assert(p.y == 2, 'Point y-value should be 2')
+  end
+
+  def test_should_be_equal
+    p1 = setup
+    p2 = Point.new(1, 2)
+    assert(!p1.eql?(p2), 'Points should be different hashes')
+    assert(p1 == p2, 'Points should be equal')
   end
 end
