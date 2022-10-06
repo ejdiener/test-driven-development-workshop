@@ -6,32 +6,32 @@ class RectangleTest < Minitest::Test
   def setup
     p1 = Point.new(0, 0)
     p2 = Point.new(2, 3)
-    r = Rectangle.new(p1, p2)
+    r = Rectangle.new(p1, p2, 'A')
     [p1, p2, r]
   end
 
   def test_point1_not_point_error
-    error = assert_raises(StandardError) { Rectangle.new([0, 0], Point.new(2, 3)) }
+    error = assert_raises(StandardError) { Rectangle.new([0, 0], Point.new(2, 3), 'A') }
     assert_equal('point1 is not a Point', error.message)
   end
 
   def test_point2_not_point_error
-    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), [2, 3]) }
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), [2, 3], 'A') }
     assert_equal('point2 is not a Point', error.message)
   end
 
   def test_pts_cant_be_equal_error
-    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(0, 0)) }
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(0, 0), 'A') }
     assert_equal('points cannot be equal', error.message)
   end
 
   def test_pts_cant_share_x_error
-    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(0, 3)) }
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(0, 3), 'A') }
     assert_equal('points should not share x value', error.message)
   end
 
   def test_pts_cant_share_y_error
-    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(2, 0)) }
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(2, 0), 'A') }
     assert_equal('points should not share y value', error.message)
   end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require_relative '../lib/app/point'
 require_relative '../lib/app/rectangle'
@@ -8,9 +10,9 @@ require_relative '../lib/app/scene'
 class SceneTest < Minitest::Test
   def setup
     p1 = Point.new(0, 0)
-    r = Rectangle.new(p1, Point.new(2, 3))
-    t = Triangle.new(p1, Point.new(0, 4), Point.new(3, 0))
-    c = Circle.new(p1, 1)
+    r = Rectangle.new(p1, Point.new(2, 3), 'A')
+    t = Triangle.new(p1, Point.new(0, 4), Point.new(3, 0), 'B')
+    c = Circle.new(p1, 1, 'C')
     [r, t, c]
   end
 
@@ -26,9 +28,7 @@ class SceneTest < Minitest::Test
 
   def test_should_add_shape
     r, t, c = setup
-    s = Scene.new
-    assert(s.shape_count == 0, "Shape count should be 0, was #{s.shape_count}")
-    s.add_shape(r)
+    s = Scene.new(r)
     assert(s.shape_count == 1, "Shape count should be 1, was #{s.shape_count}")
     s.add_shape(t)
     assert(s.shape_count == 2, "Shape count should be 2, was #{s.shape_count}")
@@ -46,8 +46,28 @@ class SceneTest < Minitest::Test
     assert(s.total_area == 15.141592653589793, "area should be 15.141592653589793, was #{s.total_area}")
   end
 
-  def test_should_remove_shape
+  def test_should_remove_rectangle
+    r, = setup
+    s = Scene.new(r)
+    assert(s.shape_count == 1, "Shape count should be 1, was #{s.shape_count}")
+    s.remove_shape('A')
+    assert(s.shape_count.zero?, "Shape count should be 0, was #{s.shape_count}")
+  end
 
+  def test_should_remove_triangle
+    _, t, = setup
+    s = Scene.new(t)
+    assert(s.shape_count == 1, "Shape count should be 1, was #{s.shape_count}")
+    s.remove_shape('B')
+    assert(s.shape_count.zero?, "Shape count should be 0, was #{s.shape_count}")
+  end
+
+  def test_should_remove_circle
+    _, _, c = setup
+    s = Scene.new(c)
+    assert(s.shape_count == 1, "Shape count should be 1, was #{s.shape_count}")
+    s.remove_shape('C')
+    assert(s.shape_count.zero?, "Shape count should be 0, was #{s.shape_count}")
   end
 
 

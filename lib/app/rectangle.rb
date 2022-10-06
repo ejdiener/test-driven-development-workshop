@@ -18,7 +18,7 @@ class Rectangle
     @points = [point1, point2]
   end
 
-  attr_reader :points
+  attr_reader :points, :id
 
   def area
     # Formula for a rectangle is the length of the x axis multiplied by the length of the y axis

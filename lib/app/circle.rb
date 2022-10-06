@@ -14,7 +14,7 @@ class Circle
     @radius = radius.abs.to_f
   end
 
-  attr_reader :point, :radius
+  attr_reader :point, :radius, :id
 
   def area
     # The formula for a circle is pi * r**2
