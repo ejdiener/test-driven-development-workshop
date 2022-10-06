@@ -17,7 +17,7 @@ class RectangleTest < Minitest::Test
   end
 
   def test_get_area
-    _, _, _, r = setup
+    _, _, r = setup
     assert(r.area == 6, 'area should be 6')
   end
 end
