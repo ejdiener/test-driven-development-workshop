@@ -7,7 +7,9 @@ class Triangle
     raise StandardError, 'point1 is not a Point' unless point1.is_a?(Point)
     raise StandardError, 'point2 is not a Point' unless point2.is_a?(Point)
     raise StandardError, 'point3 is not a Point' unless point3.is_a?(Point)
-    raise StandardError, 'points cannot be equal' unless point1 != point2 && point2 != point3 && point3 != point1
+    raise StandardError, 'points cannot be equal' if point1 == point2 || point2 == point3 || point3 == point1
+    raise StandardError, 'points should not all share x value' if point1.x == point2.x && point2.x == point3.x
+    raise StandardError, 'points should not all share y value' if point1.y == point2.y && point2.y == point3.y
 
     @points = [point1, point2, point3]
   end

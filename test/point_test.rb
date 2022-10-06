@@ -8,12 +8,12 @@ class PointTest < Minitest::Test
 
   def test_should_return_x
     p = setup
-    assert(p.x == 1, 'Point x-value should be 1')
+    assert(p.x == 1, "Point x-value should be 1, was #{p.x}")
   end
 
   def test_should_return_y
     p = setup
-    assert(p.y == 2, 'Point y-value should be 2')
+    assert(p.y == 2, "Point y-value should be 2, was #{p.y}")
   end
 
   def test_should_be_equal

@@ -10,6 +10,31 @@ class RectangleTest < Minitest::Test
     [p1, p2, r]
   end
 
+  def test_point1_not_point_error
+    error = assert_raises(StandardError) { Rectangle.new([0, 0], Point.new(2, 3)) }
+    assert_equal('point1 is not a Point', error.message)
+  end
+
+  def test_point2_not_point_error
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), [2, 3]) }
+    assert_equal('point2 is not a Point', error.message)
+  end
+
+  def test_pts_cant_be_equal_error
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(0, 0)) }
+    assert_equal('points cannot be equal', error.message)
+  end
+
+  def test_pts_cant_share_x_error
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(0, 3)) }
+    assert_equal('points should not share x value', error.message)
+  end
+
+  def test_pts_cant_share_y_error
+    error = assert_raises(StandardError) { Rectangle.new(Point.new(0, 0), Point.new(2, 0)) }
+    assert_equal('points should not share y value', error.message)
+  end
+
   def test_get_points
     p1, p2, r = setup
     r_points = r.points
@@ -18,6 +43,6 @@ class RectangleTest < Minitest::Test
 
   def test_get_area
     _, _, r = setup
-    assert(r.area == 6, 'area should be 6')
+    assert(r.area == 6, "area should be 6, was #{r.area}")
   end
 end

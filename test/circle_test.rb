@@ -1,11 +1,22 @@
 require 'test_helper'
 require_relative '../lib/app/point'
 require_relative '../lib/app/circle'
+
 class CircleTest < Minitest::Test
   def setup
     p1 = Point.new(0, 0)
-    c = Circle.new(p1, 10)
-    [p1, 10, c]
+    c = Circle.new(p1, 1)
+    [p1, 1, c]
+  end
+
+  def test_point_not_point_error
+    error = assert_raises(StandardError) { Circle.new([0, 0], 1) }
+    assert_equal('point is not a Point', error.message)
+  end
+
+  def test_radius_not_number_error
+    error = assert_raises(StandardError) { Circle.new(Point.new(0, 0), '1') }
+    assert_equal('radius is not a number', error.message)
   end
 
   def test_get_point
@@ -20,6 +31,6 @@ class CircleTest < Minitest::Test
 
   def test_get_area
     _, _, c = setup
-    assert(c.area == 314.1592653589793, "area should be 314.159, was #{c.area}")
+    assert(c.area == 3.141592653589793, "area should be 3.141592653589793, was #{c.area}")
   end
 end
