@@ -14,33 +14,42 @@ class SceneTest < Minitest::Test
     [r, t, c]
   end
 
-  def test_should_return_rectangle_count
-    r, = setup
-    s = new Scene(r)
-    assert(s.r_count == 1, "Rectangle count should be 1 because rectangle hasn't been added, was #{s.r_count}")
-  end
-
-  def test_should_return_triangle_count
-    _, t, = setup
-    s = new Scene(t)
-    assert(s.t_count == 1, "Triangle count should be 1, was #{s.t_count}")
-  end
-
-  def test_should_return_circle_count
-    _, _, c = setup
-    s = new Scene(c)
-    assert(s.c_count == 1, "Circle count should be 1, was #{s.c_count}")
-  end
-
   def test_should_return_shape_count
+    r, t, c = setup
+    sr = Scene.new(r)
+    assert(sr.shape_count == 1, "Shape count should be 1, was #{sr.shape_count}")
+    st = Scene.new(t)
+    assert(st.shape_count == 1, "Shape count should be 1, was #{st.shape_count}")
+    sc = Scene.new(c)
+    assert(sc.shape_count == 1, "Shape count should be 1, was #{sc.shape_count}")
+  end
+
+  def test_should_add_shape
+    r, t, c = setup
+    s = Scene.new
+    assert(s.shape_count == 0, "Shape count should be 0, was #{s.shape_count}")
+    s.add_shape(r)
+    assert(s.shape_count == 1, "Shape count should be 1, was #{s.shape_count}")
+    s.add_shape(t)
+    assert(s.shape_count == 2, "Shape count should be 2, was #{s.shape_count}")
+    s.add_shape(c)
+    assert(s.shape_count == 3, "Shape count should be 3, was #{s.shape_count}")
+  end
+
+  def test_should_return_total_area
+    r, t, c = setup
+    s = Scene.new(r)
+    assert(s.total_area == 6, "area should be 6, was #{s.total_area}")
+    s.add_shape(t)
+    assert(s.total_area == 12, "area should be 12, was #{s.total_area}")
+    s.add_shape(c)
+    assert(s.total_area == 15.141592653589793, "area should be 15.141592653589793, was #{s.total_area}")
+  end
+
+  def test_should_remove_shape
 
   end
 
-  def teardown
-    # Do nothing
-  end
 
-  def test
-    skip 'Not implemented'
-  end
+
 end

@@ -4,7 +4,7 @@ require_relative './point'
 
 # This class represents a rectangle using two points.
 class Rectangle
-  def initialize(point1, point2)
+  def initialize(point1, point2, id)
     # First make sure that point1 and point2 are point objects...
     raise StandardError, 'point1 is not a Point' unless point1.is_a?(Point)
     raise StandardError, 'point2 is not a Point' unless point2.is_a?(Point)
@@ -14,6 +14,7 @@ class Rectangle
     raise StandardError, 'points should not share x value' if point1.x == point2.x
     raise StandardError, 'points should not share y value' if point1.y == point2.y
 
+    @id = id
     @points = [point1, point2]
   end
 
